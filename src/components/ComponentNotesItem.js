@@ -1,16 +1,15 @@
 import React from "react";
+import ItemContent from "./ComponentItemContent";
+import DeleteButton from "./ComponentDeleteButton";
+import ArchiveButton from "./ComponentArchiveButton";
 
-function NoteItem({title, createdAt, body}) {
+function NoteItem({onDelete, ...notes}) {
     return(
         <div className="note-item">
-            <div className="note-item__content">
-                <h3 className="note-item__title">{title}</h3>
-                <p className="note-item__date">{createdAt}</p>
-                <p className="note-item__body">{body}</p>
-            </div>
+            <ItemContent {...notes}/>
             <div className="note-item__action">
-                <button className="note-item__delete-button">Hapus</button>
-                <button className="note-item__archive-button">Arsipkan</button>
+                <DeleteButton id={notes.id} onDelete={onDelete}/>
+                <ArchiveButton />
             </div>
         </div>
     )

@@ -13,10 +13,11 @@ class NoteApp extends React.Component {
             notes: getInitialData()
         }
 
-        this.addNotesHandler = this.addNotesHandler.bind(this)
+        this.addNoteHandler = this.addNoteHandler.bind(this)
+        this.deleteNoteHandler = this.deleteNoteHandler.bind(this)
     }
 
-    addNotesHandler({title, body}) {
+    addNoteHandler({title, body}) {
         const dateny = +new Date()
         this.setState((prevState) => {
             return {
@@ -34,13 +35,18 @@ class NoteApp extends React.Component {
         })
     }
 
+    deleteNoteHandler(id) {
+        const notes = this.state.notes.filter(note => note.id !== id)
+        this.setState({notes})
+    }
+
     render() {
         return(
             <div>
                 <HeaderTitlePageElement/>
                 <div className="note-app__body">
-                    <InputElement addNotes={this.addNotesHandler}/>
-                    <ListElement notes={this.state.notes} />  
+                    <InputElement addNotes={this.addNoteHandler}/>
+                    <ListElement notes={this.state.notes} onDelete={this.deleteNoteHandler} />  
                 </div>
             </div>
         )

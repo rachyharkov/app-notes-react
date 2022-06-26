@@ -1,12 +1,12 @@
 import React from "react";
 import NoteItem from "./ComponentNotesItem";
 
-function ListElement({notes}) {
+function ListElement({notes, onDelete}) {
     return(
         <div className="notes-list">
             {
                 notes.map((notenya) => (
-                    <NoteItem key={notenya.id} {...notenya} />
+                    <NoteItem key={notenya.id} onDelete={onDelete} {...notenya} />
                 ))
             }
         </div>
