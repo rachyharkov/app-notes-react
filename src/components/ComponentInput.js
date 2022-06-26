@@ -74,7 +74,7 @@ class InputElement extends React.Component {
                     <p>&#x2705;</p>
                 </div>
                 <h2 className="note-input__title">Buat Catatan</h2>
-                <p className="note-input__title__char-limit">Sisa Karakter: <span>10</span></p>
+                <p className="note-input__title__char-limit">Sisa Karakter: <span>50</span></p>
                 <input placeholder="Judul Catatan" onChange={this.onTextChangeEventHandler} type="text" name="title" required />
                 <textarea placeholder="Input catatan" onChange={this.onTextChangeEventHandler} name="body" required />
                 <button type="submit">Tambah</button>
