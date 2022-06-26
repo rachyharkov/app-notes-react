@@ -7,12 +7,14 @@ function ListNotesElement({notes, onDelete, archivedStatus}) {
         .filter((notenya) => notenya.archived == archivedStatus)
         .map((notenya) => <NoteItem key={notenya.id} onDelete={onDelete} {...notenya} />)
 
+    let whattypeofcatatanisthis = archivedStatus ? 'Catatan Arsip' : 'Catatan Aktif'
+
     return(
         <div>
-            <h3 className="notes-list__title">{archivedStatus ? 'Catatan Arsip' : 'Catatan Aktif'}</h3>
+            <h3 className="notes-list__title">{whattypeofcatatanisthis}</h3>
             <div className="notes-list">
                 {
-                    notesnya.length > 0 ? notesnya : <p className="notes-list__empty-message">Tidak ada catatan</p>
+                    notesnya.length > 0 ? notesnya : <p className="notes-list__empty-message">Tidak ada {whattypeofcatatanisthis}</p>
                 }
             </div>
         </div>
