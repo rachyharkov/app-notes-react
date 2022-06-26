@@ -47,8 +47,12 @@ class InputElement extends React.Component {
     onTextChangeEventHandler(e) {
         const thisValue = e.target.value
         const lengthValue = thisValue.length
-        const detection = this.lengthValueDetection(lengthValue, 10)
-        detection ? this.typeLimitReached(e) : this.doChangeText(e, thisValue)
+
+        if(e.target.name === 'title') {
+            const detection = this.lengthValueDetection(lengthValue, 10)
+            detection ? this.typeLimitReached(e) : this.doChangeText(e, thisValue)
+        }
+
     }
 
     onSubmitEventHandler(e) {

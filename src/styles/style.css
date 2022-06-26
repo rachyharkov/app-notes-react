@@ -136,6 +136,20 @@ input::placeholder, textarea::placeholder {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  animation: popout 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes popout {
+  from {
+    transform:scale(0)
+  }
+  80% {
+    transform:scale(1.050)
+  }
+  to
+  {
+    transform:scale(1)
+  }
 }
 
 .note-item__content {
