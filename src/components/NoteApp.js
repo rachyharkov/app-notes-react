@@ -17,6 +17,7 @@ class NoteApp extends React.Component {
 
         this.addNoteHandler = this.addNoteHandler.bind(this)
         this.deleteNoteHandler = this.deleteNoteHandler.bind(this)
+        this.archiveNoteHandler = this.archiveNoteHandler.bind(this)
         this.filterNotesHandler = this.filterNotesHandler.bind(this)
     }
 
@@ -33,6 +34,19 @@ class NoteApp extends React.Component {
                         createdAt: new Date().toISOString()
                     }
                 ]
+            }
+        })
+    }
+
+    archiveNoteHandler(id) {
+
+        const noteIndex = this.state.notes.findIndex((note) => note.id == id)
+        console.log(noteIndex)
+        this.state.notes[noteIndex].archived = !this.state.notes[noteIndex].archived
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                archived: this.state.notes[noteIndex].archived
             }
         })
     }
@@ -70,8 +84,8 @@ class NoteApp extends React.Component {
                     <HeaderTitlePageElement filterNotesHandler={this.filterNotesHandler}/>
                     <div className="note-app__body">
                         <InputElement addNotes={this.addNoteHandler}/>
-                        <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={false}/>
-                        <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={true}/>
+                        <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} onArchived={this.archiveNoteHandler} archivedStatus={false}/>
+                        <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} onArchived={this.archiveNoteHandler} archivedStatus={true}/>
                     </div>
                 </div>
             )
@@ -83,8 +97,8 @@ class NoteApp extends React.Component {
                     <HeaderTitlePageElement filterNotesHandler={this.filterNotesHandler}/>
                     <div className="note-app__body">
                         <InputElement addNotes={this.addNoteHandler}/>
-                        <ListNotesElement notes={this.state.filteredNotes} onDelete={this.deleteNoteHandler} archivedStatus={false}/>
-                        <ListNotesElement notes={this.state.filteredNotes} onDelete={this.deleteNoteHandler} archivedStatus={true}/>
+                        <ListNotesElement notes={this.state.filteredNotes} onDelete={this.deleteNoteHandler} onArchived={this.archiveNoteHandler} archivedStatus={false}/>
+                        <ListNotesElement notes={this.state.filteredNotes} onDelete={this.deleteNoteHandler} onArchived={this.archiveNoteHandler} archivedStatus={true}/>
                     </div>
                 </div>
             )

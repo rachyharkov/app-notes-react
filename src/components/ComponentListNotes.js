@@ -1,11 +1,11 @@
 import React from "react";
 import NoteItem from "./ComponentNotesItem";
 
-function ListNotesElement({notes, onDelete, archivedStatus}) {
+function ListNotesElement({notes, onDelete, onArchived, archivedStatus}) {
 
     let notesnya = notes
         .filter((notenya) => notenya.archived == archivedStatus)
-        .map((notenya) => <NoteItem key={notenya.id} onDelete={onDelete} {...notenya} />)
+        .map((notenya) => <NoteItem key={notenya.id} onDelete={onDelete} onArchived={onArchived} archivedStatus={archivedStatus} {...notenya} />)
 
     let whattypeofcatatanisthis = archivedStatus ? 'Catatan Arsip' : 'Catatan Aktif'
 
