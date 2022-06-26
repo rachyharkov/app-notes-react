@@ -59,19 +59,28 @@ class NoteApp extends React.Component {
     filterNotesHandler(e) {
         e.preventDefault()
         const value = e.target[0].value
-        console.log(value)
+        const totalOriginalLengthNotes = this.state.notes.length
         const filteredNotes = this.state.notes.filter((note) => note.body.includes(value))
-
-        if(filteredNotes.length > 0) {
+        let message
+        const currentLength = filteredNotes.length
+        if(currentLength > 0) {
+            message = currentLength + ' Catatan ditemukan'
             this.setState({
                 search: true
             })
         } else {
+            message = 'Catatan tidak ditemukan :('
             this.setState({
                 search: false
             })
         }
-        // console.log(filteredNotes)
+
+        document.querySelector('.text-small-attention').innerHTML = message
+        setTimeout(() => {
+            document.querySelector('.text-small-attention').innerHTML = 'Tekan enter untuk inisialisasi pencarian'
+        }, 2000)
+
+
         return this.setState({filteredNotes: filteredNotes})
     }
 

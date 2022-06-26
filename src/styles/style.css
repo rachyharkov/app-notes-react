@@ -50,6 +50,11 @@ input::placeholder, textarea::placeholder {
 
 }
 
+.text-small-attention {
+  font-size: 10px;
+  color: #aaa;
+}
+
 .note-app__header {
   display: flex;
   align-items: center;
