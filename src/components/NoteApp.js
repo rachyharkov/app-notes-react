@@ -10,11 +10,14 @@ class NoteApp extends React.Component {
         super(props)
 
         this.state = {
-            notes: getInitialData()
+            notes: getInitialData(),
+            search: false,
+            filteredNotes: []
         }
 
         this.addNoteHandler = this.addNoteHandler.bind(this)
         this.deleteNoteHandler = this.deleteNoteHandler.bind(this)
+        this.filterNotesHandler = this.filterNotesHandler.bind(this)
     }
 
     addNoteHandler({title, body}) {
@@ -39,17 +42,54 @@ class NoteApp extends React.Component {
         this.setState({notes})
     }
 
+    filterNotesHandler(e) {
+        e.preventDefault()
+        const value = e.target[0].value
+        console.log(value)
+        const filteredNotes = this.state.notes.filter((note) => note.body.includes(value))
+
+        if(filteredNotes.length > 0) {
+            this.setState({
+                search: true
+            })
+        } else {
+            this.setState({
+                search: false
+            })
+        }
+        // console.log(filteredNotes)
+        return this.setState({filteredNotes: filteredNotes})
+    }
+
     render() {
-        return(
-            <div>
-                <HeaderTitlePageElement/>
-                <div className="note-app__body">
-                    <InputElement addNotes={this.addNoteHandler}/>
-                    <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={false}/>
-                    <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={true}/>
+
+        if(this.state.search == false) {
+
+            return(
+                <div>
+                    <HeaderTitlePageElement filterNotesHandler={this.filterNotesHandler}/>
+                    <div className="note-app__body">
+                        <InputElement addNotes={this.addNoteHandler}/>
+                        <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={false}/>
+                        <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={true}/>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+
+        if(this.state.search == true) {
+            return(
+                <div>
+                    <HeaderTitlePageElement filterNotesHandler={this.filterNotesHandler}/>
+                    <div className="note-app__body">
+                        <InputElement addNotes={this.addNoteHandler}/>
+                        <ListNotesElement notes={this.state.filteredNotes} onDelete={this.deleteNoteHandler} archivedStatus={false}/>
+                        <ListNotesElement notes={this.state.filteredNotes} onDelete={this.deleteNoteHandler} archivedStatus={true}/>
+                    </div>
+                </div>
+            )
+        }
+
     }
 }
 
