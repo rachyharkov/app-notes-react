@@ -12,6 +12,26 @@ class NoteApp extends React.Component {
         this.state = {
             notes: getInitialData()
         }
+
+        this.addNotesHandler = this.addNotesHandler.bind(this)
+    }
+
+    addNotesHandler({title, body}) {
+        const dateny = +new Date()
+        this.setState((prevState) => {
+            return {
+                notes : [
+                    ...prevState.notes,
+                    {
+                        id: dateny,
+                        title: title,
+                        body: body,
+                        archived: false,
+                        createdAt: dateny
+                    }
+                ]
+            }
+        })
     }
 
     render() {
@@ -19,7 +39,7 @@ class NoteApp extends React.Component {
             <div>
                 <HeaderTitlePageElement/>
                 <div className="note-app__body">
-                    <InputElement/>
+                    <InputElement addNotes={this.addNotesHandler}/>
                     <ListElement notes={this.state.notes} />  
                 </div>
             </div>

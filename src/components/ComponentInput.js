@@ -32,7 +32,6 @@ class InputElement extends React.Component {
     }
 
     typeLimitReached(e) {
-        // alert('Judul Kepanjangan')
         e.target.value = this.state[e.target.name]
     }
 
@@ -55,6 +54,7 @@ class InputElement extends React.Component {
     onSubmitEventHandler(e) {
         e.preventDefault()
         alert(JSON.stringify(this.state))
+        this.props.addNotes(this.state)
     }
     
     render() {

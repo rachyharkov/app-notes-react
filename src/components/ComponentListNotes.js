@@ -6,7 +6,7 @@ function ListElement({notes}) {
         <div className="notes-list">
             {
                 notes.map((notenya) => (
-                    <NoteItem {...notenya} />
+                    <NoteItem key={notenya.id} {...notenya} />
                 ))
             }
         </div>
