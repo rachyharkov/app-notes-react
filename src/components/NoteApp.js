@@ -18,17 +18,16 @@ class NoteApp extends React.Component {
     }
 
     addNoteHandler({title, body}) {
-        const dateny = +new Date()
         this.setState((prevState) => {
             return {
                 notes : [
                     ...prevState.notes,
                     {
-                        id: dateny,
+                        id: +new Date(),
                         title: title,
                         body: body,
                         archived: false,
-                        createdAt: dateny
+                        createdAt: new Date().toISOString()
                     }
                 ]
             }

@@ -96,10 +96,10 @@ input::placeholder, textarea::placeholder {
   top: 0;
   background-color: #202124;
   display: none;
+  line-height: 2;
 }
 
 .note-input__success-indicator p {
-  margin-top: 13vh;
   font-size: 90px;
 }
 

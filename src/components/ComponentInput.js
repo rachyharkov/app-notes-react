@@ -8,12 +8,9 @@ class InputElement extends React.Component {
         this.state = {
             title: '',
             body: '',
-            // archived: 0,
-            // createdAt: ''
         }
 
         this.onTextChangeEventHandler = this.onTextChangeEventHandler.bind(this)
-
         this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this)
     }
 
@@ -36,6 +33,7 @@ class InputElement extends React.Component {
     }
 
     doChangeText(e, thisValue) {
+        // console.log(e.target.value)
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -53,12 +51,14 @@ class InputElement extends React.Component {
             detection ? this.typeLimitReached(e) : this.doChangeText(e, thisValue)
         }
 
+        if(e.target.name === 'body') {
+            this.doChangeText(e, thisValue)
+        }
     }
     
 
     onSubmitEventHandler(e) {
         e.preventDefault()
-        // alert(JSON.stringify(this.state))
         this.props.addNotes(this.state)
         document.querySelector('.note-input__success-indicator').classList.add('active')
         setTimeout(() => {
@@ -75,8 +75,8 @@ class InputElement extends React.Component {
                 </div>
                 <h2 className="note-input__title">Buat Catatan</h2>
                 <p className="note-input__title__char-limit">Sisa Karakter: <span>10</span></p>
-                <input placeholder="Judul Catatan" onChange={this.onTextChangeEventHandler} type="text" name="title"/>
-                <textarea placeholder="Input catatan" onChange={this.onTextChangeEventHandler} name="body"></textarea>
+                <input placeholder="Judul Catatan" onChange={this.onTextChangeEventHandler} type="text" name="title" required />
+                <textarea placeholder="Input catatan" onChange={this.onTextChangeEventHandler} name="body" required />
                 <button type="submit">Tambah</button>
             </form>
         )
