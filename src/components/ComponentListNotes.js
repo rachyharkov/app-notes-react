@@ -1,16 +1,17 @@
 import React from "react";
-import { getInitialData } from "../utils";
+import NoteItem from "./ComponentNotesItem";
 
-function ListElement() {
+function ListElement({notes}) {
     return(
         <div className="notes-list">
             {
-                getInitialData.map((datanya) => (
-                    <div>
-                    </div>
+                notes.map((notenya) => (
+                    <NoteItem {...notenya} />
                 ))
             }
         </div>
 
     )
 }
+
+export default ListElement
