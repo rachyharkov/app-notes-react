@@ -54,16 +54,25 @@ class InputElement extends React.Component {
         }
 
     }
+    
 
     onSubmitEventHandler(e) {
         e.preventDefault()
-        alert(JSON.stringify(this.state))
+        // alert(JSON.stringify(this.state))
         this.props.addNotes(this.state)
+        document.querySelector('.note-input__success-indicator').classList.add('active')
+        setTimeout(() => {
+            document.querySelector('.note-input__success-indicator').classList.remove('active')
+            e.target.reset()
+        }, 3000)
     }
     
     render() {
         return(
             <form className="note-input" onSubmit={this.onSubmitEventHandler}>
+                <div className="note-input__success-indicator">
+                    <p>&#x2705;</p>
+                </div>
                 <h2 className="note-input__title">Buat Catatan</h2>
                 <p className="note-input__title__char-limit">Sisa Karakter: <span>10</span></p>
                 <input placeholder="Judul Catatan" onChange={this.onTextChangeEventHandler} type="text" name="title"/>
