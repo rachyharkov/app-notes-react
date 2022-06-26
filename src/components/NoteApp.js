@@ -1,7 +1,7 @@
 import React from "react"
 import HeaderTitlePageElement from "./ComponentHeaderTitle"
 import InputElement from "./ComponentInput"
-import ListElement from "./ComponentListNotes"
+import ListNotesElement from "./ComponentListNotes"
 import { getInitialData } from '../utils/index'
 
 class NoteApp extends React.Component {
@@ -45,7 +45,8 @@ class NoteApp extends React.Component {
                 <HeaderTitlePageElement/>
                 <div className="note-app__body">
                     <InputElement addNotes={this.addNoteHandler}/>
-                    <ListElement notes={this.state.notes} onDelete={this.deleteNoteHandler} />  
+                    <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={false}/>
+                    <ListNotesElement notes={this.state.notes} onDelete={this.deleteNoteHandler} archivedStatus={true}/>
                 </div>
             </div>
         )

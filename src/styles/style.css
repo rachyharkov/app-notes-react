@@ -156,9 +156,15 @@ input::placeholder, textarea::placeholder {
   margin-bottom: 48px;
 }
 
+.notes-list__title {
+  margin-bottom: 2vh;
+}
+
 .notes-list__empty-message {
   text-align: center;
   color: #aaa;
+  height: 100px;
+  line-height: 3;
 }
 
 .note-item {

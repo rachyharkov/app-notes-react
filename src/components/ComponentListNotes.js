@@ -1,25 +1,22 @@
 import React from "react";
 import NoteItem from "./ComponentNotesItem";
 
-function ListElement({notes, onDelete}) {
+function ListNotesElement({notes, onDelete, archivedStatus}) {
 
-    if(notes.length > 0) {
-        return(
+    let notesnya = notes
+        .filter((notenya) => notenya.archived == archivedStatus)
+        .map((notenya) => <NoteItem key={notenya.id} onDelete={onDelete} {...notenya} />)
+
+    return(
+        <div>
+            <h3 className="notes-list__title">{archivedStatus ? 'Catatan Arsip' : 'Catatan Aktif'}</h3>
             <div className="notes-list">
                 {
-                    notes.map((notenya) => (
-                        <NoteItem key={notenya.id} onDelete={onDelete} {...notenya} />
-                    ))
+                    notesnya.length > 0 ? notesnya : <p className="notes-list__empty-message">Tidak ada catatan</p>
                 }
             </div>
-        )
-    } else {
-        return(
-            <div className="notes-list">
-                <p className="notes-list__empty-message">Tidak ada catatan</p>
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
-export default ListElement
+export default ListNotesElement
