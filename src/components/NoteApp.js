@@ -41,7 +41,6 @@ class NoteApp extends React.Component {
     archiveNoteHandler(id) {
 
         const noteIndex = this.state.notes.findIndex((note) => note.id == id)
-        console.log(noteIndex)
         this.state.notes[noteIndex].archived = !this.state.notes[noteIndex].archived
         this.setState((prevState) => {
             return {
@@ -59,15 +58,22 @@ class NoteApp extends React.Component {
     filterNotesHandler(e) {
         e.preventDefault()
         const value = e.target[0].value
-        const totalOriginalLengthNotes = this.state.notes.length
         const filteredNotes = this.state.notes.filter((note) => note.body.includes(value))
+        const totalOriginalLengthNotes = this.state.notes.length
         let message
         const currentLength = filteredNotes.length
         if(currentLength > 0) {
-            message = currentLength + ' Catatan ditemukan'
-            this.setState({
-                search: true
-            })
+            if(currentLength >= totalOriginalLengthNotes) {
+                this.setState({
+                    search: false
+                })
+                message = 'Harap masukan input!'
+            } else {
+                this.setState({
+                    search: true
+                })
+                message = currentLength + ' Catatan ditemukan'
+            }
         } else {
             message = 'Catatan tidak ditemukan :('
             this.setState({
